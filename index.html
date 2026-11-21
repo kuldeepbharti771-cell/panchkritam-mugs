@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panchkritam Mugs | Custom Gifts</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#f5f7fb;color:#202124}
+header{background:#1769e0;color:white;padding:16px 5%;position:sticky;top:0;z-index:5}
+.top{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.logo{font-size:23px;font-weight:800}
+.search{flex:1;max-width:500px;padding:12px;border:0;border-radius:7px;font-size:15px}
+.cart{background:#fff;color:#1769e0;padding:11px 16px;border:0;border-radius:7px;font-weight:bold}
+.hero{margin:22px auto;padding:45px 7%;max-width:1200px;border-radius:15px;background:linear-gradient(110deg,#102c58,#237be8);color:white}
+.hero h1{font-size:clamp(28px,5vw,48px);margin-bottom:12px}
+.hero p{font-size:17px;line-height:1.6}
+.hero button,.buy{background:#ffca28;color:#202124;border:0;padding:12px 20px;border-radius:7px;font-weight:bold;cursor:pointer;margin-top:18px}
+main{max-width:1200px;margin:auto;padding:15px}
+.heading{margin:25px 0 18px;font-size:25px}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px}
+.product{background:white;border-radius:12px;padding:13px;box-shadow:0 3px 15px #0000000c}
+.product img{width:100%;height:190px;object-fit:cover;border-radius:9px}
+.product h3{margin:12px 0 7px}
+.price{font-size:20px;font-weight:bold;color:#1769e0}
+.old{font-size:13px;color:#888;text-decoration:line-through;margin-left:7px}
+.product p{color:#666;font-size:14px;margin-top:7px}
+.buy{width:100%;margin-top:12px;background:#1769e0;color:white}
+.panel{background:white;padding:20px;border-radius:12px;margin:25px 0}
+input,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:7px;margin:8px 0;font-size:15px}
+footer{text-align:center;background:#172b4d;color:white;padding:25px;margin-top:30px;line-height:1.8}
+#cartItems{line-height:2}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="top">
+  <div class="logo">☕ Panchkritam Mugs</div>
+  <input class="search" id="search" placeholder="Search your favourite mug..." oninput="searchProducts()">
+  <button class="cart" onclick="document.getElementById('cart').scrollIntoView()">🛒 Cart (<span id="count">0</span>)</button>
+ </div>
+</header>
+
+<section class="hero">
+ <h1>Your Memories, On A Mug! ❤️</h1>
+ <p>Personalized mugs made specially for you.<br>
+ Add your name, photo or a special message.</p>
+ <button onclick="document.getElementById('shop').scrollIntoView()">SHOP NOW →</button>
+</section>
+
+<main>
+ <h2 class="heading" id="shop">Our Best Selling Mugs</h2>
+ <div class="products" id="products"></div>
+
+ <section class="panel" id="cart">
+  <h2>Your Shopping Cart 🛒</h2>
+  <div id="cartItems">Your cart is empty.</div>
+  <h3 id="total">Total: ₹0</h3>
+ </section>
+
+ <section class="panel">
+  <h2>Place Your Order</h2>
+  <p>Enter your details and tell us how you want your mug customized.</p>
+  <input id="customer" placeholder="Your full name">
+  <input id="phone" placeholder="Your mobile number" type="tel">
+  <textarea id="address" placeholder="Your complete delivery address"></textarea>
+  <textarea id="custom" placeholder="Customization: Name, photo or message you want on the mug"></textarea>
+  <button class="buy" onclick="placeOrder()">ORDER ON WHATSAPP</button>
+ </section>
+</main>
+
+<footer>
+ <h2>Panchkritam Mugs</h2>
+ Personalized Gifts | Custom Photo Mugs | Special Memories
+ <p>Made with ❤️ for your special moments</p>
+</footer>
+
+<script>
+const products = [
+ {id:1,name:"Classic White Photo Mug",price:249,
+ image:"https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=600"},
+ {id:2,name:"Personalized Coffee Mug",price:299,
+ image:"https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600"},
+ {id:3,name:"Special Gift Mug",price:349,
+ image:"https://images.unsplash.com/photo-1577937927133-66ef06acdf18?w=600"},
+ {id:4,name:"Custom Name Mug",price:279,
+ image:"https://images.unsplash.com/photo-1517256673644-36ad11246d21?w=600"}
+];
+let cart=[];
+
+function showProducts(list=products){
+ document.getElementById("products").innerHTML=list.map(p=>`
+ <div class="product">
+  <img src="${p.image}" alt="${p.name}">
+  <h3>${p.name}</h3>
+  <div class="price">₹${p.price}</div>
+  <p>Customize with your own name, photo or message.</p>
+  <button class="buy" onclick="addToCart(${p.id})">ADD TO CART</button>
+ </div>`).join("");
+}
+function searchProducts(){
+ const q=document.getElementById("search").value.toLowerCase();
+ showProducts(products.filter(p=>p.name.toLowerCase().includes(q)));
+}
+function addToCart(id){
+ const item=cart.find(x=>x.id===id);
+ if(item)item.qty++;
+ else cart.push({...products.find(p=>p.id===id),qty:1});
+ updateCart();
+}
+function updateCart(){
+ document.getElementById("count").innerText=cart.reduce((s,p)=>s+p.qty,0);
+ document.getElementById("cartItems").innerHTML=cart.length?
+ cart.map(p=>`${p.name} × ${p.qty} — ₹${p.price*p.qty}
+ <button onclick="removeItem(${p.id})">Remove</button>`).join("<br>"):
+ "Your cart is empty.";
+ document.getElementById("total").innerText=
+ "Total: ₹"+cart.reduce((s,p)=>s+p.price*p.qty,0);
+}
+function removeItem(id){
+ cart=cart.filter(p=>p.id!==id);
+ updateCart();
+}
+function placeOrder(){
+ if(!cart.length){alert("Please add a mug to your cart first.");return;}
+ const name=document.getElementById("customer").value.trim();
+ const phone=document.getElementById("phone").value.trim();
+ const address=document.getElementById("address").value.trim();
+ const custom=document.getElementById("custom").value.trim();
+ if(!name||!phone||!address){alert("Please enter your name, phone and address.");return;}
+ const items=cart.map(p=>`${p.name} x ${p.qty} = ₹${p.price*p.qty}`).join("\n");
+ const total=cart.reduce((s,p)=>s+p.price*p.qty,0);
+ const message=`New Order - Panchkritam Mugs\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\nProducts:\n${items}\nTotal: ₹${total}\nCustomization: ${custom}`;
+ const whatsappNumber="91XXXXXXXXXX";
+ if(whatsappNumber.includes("X")){
+  alert("Website demo: Replace the WhatsApp number in the code with your business number before accepting orders.");
+  return;
+ }
+ window.open("https://wa.me/"+whatsappNumber+"?text="+encodeURIComponent(message),"_blank");
+}
+showProducts();
+</script>
+</body>
+</html>
