@@ -5,342 +5,243 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Panchkritam | Custom Mugs</title>
-
 <style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #080808;
-  color: white;
-}
-
-header {
-  background: #111;
-  padding: 22px 12px;
-  text-align: center;
-  border-bottom: 1px solid #b89135;
-}
-
-header h1 {
-  color: #d7b65b;
-  margin: 0;
-  letter-spacing: 2px;
-}
-
-header p {
-  color: #ddd;
-  margin-bottom: 0;
-}
-
-.container {
-  max-width: 900px;
-  margin: auto;
-  padding: 18px;
-}
-
-h2 {
-  color: #e4c36a;
-  text-align: center;
-}
-
-.product {
-  background: #171717;
-  border: 1px solid #393939;
-  border-radius: 14px;
-  padding: 18px;
-  margin: 18px 0;
-  text-align: center;
-}
-
-.price {
-  color: #e8c66b;
-  font-size: 23px;
-  font-weight: bold;
-}
-
-.mug-area {
-  height: 190px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 15px auto;
-}
-
-.mug {
-  width: 165px;
-  height: 125px;
-  border-radius: 8px 8px 22px 22px;
-  position: relative;
-  background: white;
-  border: 2px solid #aaa;
-  box-shadow: 0 8px 15px #000;
-  transition: 0.3s;
-}
-
-.mug::after {
-  content: "";
-  position: absolute;
-  width: 42px;
-  height: 55px;
-  right: -38px;
-  top: 24px;
-  border: 12px solid white;
-  border-left: 0;
-  border-radius: 0 25px 25px 0;
-}
-
-.mug.black {
-  background: #050505;
-  border-color: #333;
-}
-
-.mug.black::after {
-  border-color: #050505;
-}
-
-.mug.premium {
-  background: #050505;
-  border-color: #333;
-  border-top: 7px solid #d5ad43;
-}
-
-.mug.premium::after {
-  border-color: #050505;
-}
-
-.photo-preview {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  position: absolute;
-  left: 0;
-  top: 0;
-  padding: 10px;
-  z-index: 2;
-}
-
-.mug.premium .photo-preview,
-.mug.black .photo-preview {
-  padding-top: 15px;
-}
-
-input, select {
-  width: 100%;
-  padding: 13px;
-  margin: 9px 0;
-  border-radius: 8px;
-  border: 1px solid #aaa;
-  background: #fff;
-  color: #111;
-}
-
-button {
-  padding: 13px 18px;
-  margin: 6px;
-  border: none;
-  border-radius: 8px;
-  background: #d5ad43;
-  color: #111;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #f2d47b;
-}
-
-.note {
-  color: #bbb;
-  font-size: 13px;
-  line-height: 1.5;
-}
-
-footer {
-  text-align: center;
-  padding: 20px;
-  color: #aaa;
-  border-top: 1px solid #333;
-}
+*{box-sizing:border-box}
+body{margin:0;background:#080808;color:white;font-family:Arial,sans-serif}
+header{text-align:center;padding:22px;background:#111;border-bottom:1px solid #c5a34b}
+header h1{color:#d8b65b;letter-spacing:3px;margin:0}
+.container{max-width:850px;margin:auto;padding:15px}
+h2{color:#dfbd60;text-align:center}
+.product,.cart{background:#171717;border:1px solid #444;border-radius:13px;padding:17px;margin:16px 0}
+.price{font-size:22px;color:#e4c36b;font-weight:bold}
+.mug-area{height:155px;display:flex;align-items:center;justify-content:center}
+.mug{width:145px;height:110px;background:white;border:2px solid #aaa;border-radius:8px 8px 20px 20px;position:relative}
+.mug:after{content:"";position:absolute;right:-35px;top:20px;width:30px;height:48px;border:10px solid white;border-left:0;border-radius:0 25px 25px 0}
+.mug.black,.mug.premium{background:#030303;border-color:#333}
+.mug.black:after,.mug.premium:after{border-color:#030303}
+.mug.premium{border-top:7px solid #d6ae43}
+.mug img{width:100%;height:100%;object-fit:contain;padding:9px;position:absolute;z-index:2}
+button{background:#d5ae4b;color:#111;border:0;padding:12px 16px;border-radius:8px;font-weight:bold;margin:5px;cursor:pointer}
+input,select{width:100%;padding:12px;margin:8px 0;border-radius:7px}
+.cart-item{display:flex;gap:12px;align-items:center;border-bottom:1px solid #444;padding:12px 0}
+.cart-item img{width:65px;height:65px;object-fit:contain;background:white;border-radius:6px}
+.cart-item p{margin:5px 0}
+.small{font-size:13px;color:#bbb}
+.total{font-size:23px;color:#e6c36b;font-weight:bold;text-align:right}
+footer{text-align:center;color:#aaa;padding:20px}
 </style>
 </head>
-
 <body>
 
 <header>
-  <h1>PANCHKRITAM</h1>
-  <p>Your Photo, Your Custom Mug</p>
+<h1>PANCHKRITAM</h1>
+<p>Your Photo, Your Custom Mug</p>
 </header>
 
 <div class="container">
+<h2>अपना पसंदीदा मग चुनें</h2>
 
-  <h2>अपना पसंदीदा मग चुनें</h2>
+<div class="product">
+<h3>White Photo Mug</h3>
+<div class="price">₹249 से शुरू</div>
+<div class="mug-area"><div class="mug"></div></div>
+<button onclick="selectMug('white')">White Mug चुनें</button>
+</div>
 
-  <div class="product">
-    <h3>White Photo Mug</h3>
-    <div class="price">₹249 से शुरू</div>
-    <div class="mug-area">
-      <div class="mug" id="whiteMug">
-        <img class="photo-preview" id="whitePreview" hidden>
-      </div>
-    </div>
-    <p class="note">11 OZ White Ceramic Mug</p>
-    <button onclick="chooseMug('white')">White Mug चुनें</button>
-  </div>
+<div class="product">
+<h3>Jet Black Photo Mug</h3>
+<div class="price">₹349</div>
+<div class="mug-area"><div class="mug black"></div></div>
+<button onclick="selectMug('black')">Black Mug चुनें</button>
+</div>
 
-  <div class="product">
-    <h3>Jet Black Photo Mug</h3>
-    <div class="price">₹349</div>
-    <div class="mug-area">
-      <div class="mug black" id="blackMug">
-        <img class="photo-preview" id="blackPreview" hidden>
-      </div>
-    </div>
-    <p class="note">11 OZ पूरा Jet Black Mug</p>
-    <button onclick="chooseMug('black')">Black Mug चुनें</button>
-  </div>
+<div class="product">
+<h3>Premium Golden Stripe Mug</h3>
+<div class="price">₹399 से शुरू</div>
+<div class="mug-area"><div class="mug premium"></div></div>
+<button onclick="selectMug('premium')">Premium Mug चुनें</button>
+</div>
 
-  <div class="product">
-    <h3>Premium Golden Stripe Mug</h3>
-    <div class="price">₹399 से शुरू</div>
-    <div class="mug-area">
-      <div class="mug premium" id="premiumMug">
-        <img class="photo-preview" id="premiumPreview" hidden>
-      </div>
-    </div>
-    <p class="note">11 OZ Black Mug with Golden Top Stripe</p>
-    <button onclick="chooseMug('premium')">Premium Mug चुनें</button>
-  </div>
+<div class="product" id="customize">
+<h2>अपना मग Customize करें</h2>
 
-  <div class="product">
-    <h2>अपना मग Customize करें</h2>
+<label>मग का प्रकार:</label>
+<select id="type" onchange="updatePreview()">
+<option value="white">White Mug - ₹249</option>
+<option value="black">Jet Black Mug - ₹349</option>
+<option value="premium">Premium Golden Stripe - ₹399</option>
+</select>
 
-    <label>अपनी फोटो अपलोड करें:</label>
-    <input type="file" id="photoInput" accept="image/*">
+<label>अपनी फोटो अपलोड करें:</label>
+<input type="file" id="photo" accept="image/*">
 
-    <label>अपना नाम लिखें (Optional):</label>
-    <input type="text" id="customerName"
-      placeholder="अपना नाम लिखें">
+<label>अपना नाम (Optional):</label>
+<input id="customerName" placeholder="अपना नाम लिखें">
 
-    <label>मग का प्रकार चुनें:</label>
-    <select id="mugChoice" onchange="updatePreview()">
-      <option value="white">White Mug - ₹249 से शुरू</option>
-      <option value="black">Jet Black Mug - ₹349</option>
-      <option value="premium">Premium Golden Stripe - ₹399 से शुरू</option>
-    </select>
+<div class="mug-area">
+<div class="mug" id="previewMug">
+<img id="previewImage" hidden>
+</div>
+</div>
 
-    <div class="mug-area">
-      <div class="mug" id="mainMug">
-        <img class="photo-preview" id="mainPreview" hidden>
-      </div>
-    </div>
+<button onclick="addToCart()">कार्ट में जोड़ें</button>
+<p class="small">फोटो अपलोड करके प्रीव्यू देखें, फिर कार्ट में जोड़ें।</p>
+</div>
 
-    <button onclick="previewPhoto()">फोटो का Preview देखें</button>
-    <button onclick="demoOrder()">Buy Now</button>
-
-    <p class="note">
-      यह अभी डेमो प्रीव्यू है। अपलोड की गई फोटो फिलहाल
-      इसी ब्राउज़र में दिखाई जाती है, सर्वर पर सेव नहीं होती।
-      असली ऑर्डर और पेमेंट के लिए अगला सिस्टम जोड़ना होगा।
-    </p>
-  </div>
+<div class="cart" id="cart">
+<h2>🛒 आपका Shopping Cart</h2>
+<div id="cartItems">आपका कार्ट खाली है।</div>
+<div class="total" id="total">कुल: ₹0</div>
+<button onclick="demoCheckout()">Checkout करें</button>
+</div>
 
 </div>
 
-<footer>
-  © 2026 Panchkritam. All Rights Reserved.
-</footer>
+<footer>© 2026 Panchkritam</footer>
 
 <script>
-let uploadedPhoto = "";
-
-const prices = {
-  white: "₹249 से शुरू",
-  black: "₹349",
-  premium: "₹399 से शुरू"
+const prices={white:249,black:349,premium:399};
+const names={
+ white:"White Photo Mug",
+ black:"Jet Black Photo Mug",
+ premium:"Premium Golden Stripe Mug"
 };
 
-function chooseMug(type) {
-  document.getElementById("mugChoice").value = type;
-  updatePreview();
-  document.getElementById("mugChoice").scrollIntoView({
-    behavior: "smooth",
-    block: "center"
-  });
+let uploadedPhoto="";
+let cart=JSON.parse(localStorage.getItem("panchkritamCart")||"[]");
+
+function selectMug(type){
+ document.getElementById("type").value=type;
+ updatePreview();
+ document.getElementById("customize").scrollIntoView({behavior:"smooth"});
 }
 
-function updatePreview() {
-  const type = document.getElementById("mugChoice").value;
-  const mug = document.getElementById("mainMug");
-
-  mug.className = "mug";
-
-  if (type === "black") {
-    mug.classList.add("black");
-  }
-
-  if (type === "premium") {
-    mug.classList.add("premium");
-  }
-
-  if (uploadedPhoto) {
-    const img = document.getElementById("mainPreview");
-    img.src = uploadedPhoto;
-    img.hidden = false;
-  }
+function updatePreview(){
+ let type=document.getElementById("type").value;
+ let mug=document.getElementById("previewMug");
+ mug.className="mug";
+ if(type==="black")mug.classList.add("black");
+ if(type==="premium")mug.classList.add("premium");
 }
 
-document.getElementById("photoInput")
-.addEventListener("change", function(event) {
-  const file = event.target.files[0];
-
-  if (!file) return;
-
-  if (!file.type.startsWith("image/")) {
-    alert("कृपया फोटो फाइल चुनें।");
-    return;
-  }
-
-  if (file.size > 8 * 1024 * 1024) {
-    alert("फोटो 8 MB से छोटी चुनें।");
-    return;
-  }
-
-  const reader = new FileReader();
-
-  reader.onload = function(e) {
-    uploadedPhoto = e.target.result;
-
-    ["whitePreview", "blackPreview", "premiumPreview"]
-    .forEach(function(id) {
-      const img = document.getElementById(id);
-      img.src = uploadedPhoto;
-      img.hidden = false;
-    });
-
-    updatePreview();
-  };
-
-  reader.readAsDataURL(file);
+document.getElementById("photo").addEventListener("change",function(e){
+ const file=e.target.files[0];
+ if(!file)return;
+ if(!file.type.startsWith("image/")){
+  alert("कृपया सही फोटो चुनें।");return;
+ }
+ if(file.size>2*1024*1024){
+  alert("कृपया 2 MB से छोटी फोटो चुनें।");return;
+ }
+ const reader=new FileReader();
+ reader.onload=function(){
+  uploadedPhoto=reader.result;
+  const img=document.getElementById("previewImage");
+  img.src=uploadedPhoto;
+  img.hidden=false;
+ };
+ reader.readAsDataURL(file);
 });
 
-function previewPhoto() {
-  if (!uploadedPhoto) {
-    alert("पहले अपनी फोटो अपलोड करें।");
-    return;
-  }
+function addToCart(){
+ if(!uploadedPhoto){
+  alert("पहले अपनी फोटो अपलोड करें।");return;
+ }
+ const type=document.getElementById("type").value;
+ const name=document.getElementById("customerName").value.trim();
 
-  updatePreview();
-  alert("आपका फोटो प्रीव्यू तैयार है!");
+ cart.push({
+  id:Date.now(),
+  type:type,
+  name:names[type],
+  price:prices[type],
+  photo:uploadedPhoto,
+  customerName:name,
+  qty:1
+ });
+
+ saveCart();
+ alert("मग आपके कार्ट में जुड़ गया!");
 }
 
-function demoOrder() {
-  alert("यह अभी डेमो बटन है। असली ऑर्डर सिस्टम अगले चरण में जोड़ा जाएगा।");
+function saveCart(){
+ try{
+  localStorage.setItem("panchkritamCart",JSON.stringify(cart));
+  renderCart();
+ }catch(e){
+  alert("कार्ट में जगह कम है। छोटी फोटो चुनें या कुछ मग हटाएँ।");
+ }
 }
+
+function changeQty(id,amount){
+ const item=cart.find(x=>x.id===id);
+ if(!item)return;
+ item.qty+=amount;
+ if(item.qty<=0){
+  cart=cart.filter(x=>x.id!==id);
+ }
+ saveCart();
+}
+
+function removeItem(id){
+ cart=cart.filter(x=>x.id!==id);
+ saveCart();
+}
+
+function renderCart(){
+ const box=document.getElementById("cartItems");
+ box.innerHTML="";
+ let total=0;
+
+ if(cart.length===0){
+  box.textContent="आपका कार्ट खाली है।";
+ }else{
+  cart.forEach(item=>{
+   total+=item.price*item.qty;
+   const div=document.createElement("div");
+   div.className="cart-item";
+
+   const img=document.createElement("img");
+   img.src=item.photo;
+
+   const details=document.createElement("div");
+   const title=document.createElement("p");
+   title.textContent=item.name;
+   const price=document.createElement("p");
+   price.textContent="₹"+item.price+" × "+item.qty;
+   const customer=document.createElement("p");
+   customer.className="small";
+   customer.textContent=item.customerName||"";
+   const controls=document.createElement("div");
+
+   const minus=document.createElement("button");
+   minus.textContent="−";
+   minus.onclick=()=>changeQty(item.id,-1);
+   const plus=document.createElement("button");
+   plus.textContent="+";
+   plus.onclick=()=>changeQty(item.id,1);
+   const remove=document.createElement("button");
+   remove.textContent="हटाएँ";
+   remove.onclick=()=>removeItem(item.id);
+
+   controls.append(minus,plus,remove);
+   details.append(title,price,customer,controls);
+   div.append(img,details);
+   box.append(div);
+  });
+ }
+
+ document.getElementById("total").textContent="कुल: ₹"+total;
+}
+
+function demoCheckout(){
+ if(cart.length===0){
+  alert("पहले कार्ट में मग जोड़ें।");return;
+ }
+ alert("आपका कार्ट तैयार है। असली Checkout और Order System अगले चरण में जोड़ा जाएगा।");
+}
+
+renderCart();
 </script>
-
 </body>
 </html>
