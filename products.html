@@ -1,39 +1,106 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panchkritam Products</title>
-    <style>
-        body {
-            background: #111;
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 30px;
-        }
-        h1 {
-            color: gold;
-        }
-        .product {
-            background: #222;
-            padding: 20px;
-            margin: 15px auto;
-            border-radius: 12px;
-            max-width: 350px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panchkritam - Custom Mug</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#090909;color:white;font-family:Arial,sans-serif}
+header{text-align:center;padding:20px;background:#151515;border-bottom:2px solid #c9a34a}
+header h1{color:#d8b45b;margin:0;letter-spacing:3px}
+nav{margin-top:12px}
+nav a{color:white;text-decoration:none;margin:10px}
+.container{max-width:700px;margin:auto;padding:18px}
+h2{color:#d8b45b;text-align:center}
+.card{background:#191919;border:1px solid #9c7935;border-radius:14px;padding:18px;margin:15px 0}
+label{display:block;margin:14px 0 8px}
+input,button{font-size:16px}
+input[type=file]{width:100%;padding:12px;background:#292929;color:white;border-radius:8px}
+.preview{background:#eee;border-radius:12px;padding:20px;text-align:center}
+.mug{position:relative;display:inline-block;margin:20px auto;width:220px;height:190px}
+.cup{position:absolute;left:20px;top:20px;width:145px;height:145px;background:linear-gradient(90deg,#ddd,#fff,#ddd);border-radius:8px 8px 35px 35px;box-shadow:inset -8px 0 12px #ccc,0 8px 12px #999;overflow:hidden}
+.handle{position:absolute;left:150px;top:48px;width:55px;height:75px;border:13px solid #eee;border-radius:50%;box-shadow:3px 3px 5px #aaa}
+#photo{position:absolute;left:25px;top:35px;width:135px;height:105px;object-fit:contain;z-index:2}
+#placeholder{position:absolute;left:35px;top:80px;width:115px;color:#999;font-size:12px;z-index:2}
+.price{font-size:24px;color:#d8b45b;font-weight:bold;text-align:center}
+.action{width:100%;padding:14px;background:#d8b45b;color:#111;border:0;border-radius:8px;font-weight:bold;margin-top:12px}
+.note{color:#bbb;font-size:13px;text-align:center}
+</style>
 </head>
 <body>
 
-    <h1>PANCHKRITAM</h1>
-    <h2>Our Products</h2>
+<header>
+<h1>PANCHKRITAM</h1>
+<nav>
+<a href="index.html">Home</a>
+<a href="products.html">Products</a>
+</nav>
+</header>
 
-    <div class="product">☕ Printing Mugs</div>
-    <div class="product">🎨 Custom Mugs</div>
-    <div class="product">🎁 Ready-Made Mugs</div>
-    <div class="product">❤️ Gift Mugs</div>
+<div class="container">
+<h2>Design Your Own Mug ❤️</h2>
+
+<div class="card">
+<h3>11 OZ Custom Photo Mug</h3>
+<p>White Ceramic Sublimation Mug</p>
+<div class="price">₹299</div>
+
+<label for="upload">अपनी फोटो अपलोड करें</label>
+<input type="file" id="upload" accept="image/*">
+
+<label for="message">मग पर लिखने के लिए नाम (वैकल्पिक)</label>
+<input id="message" type="text" placeholder="अपना नाम लिखें"
+style="width:100%;padding:12px;border-radius:8px">
+
+</div>
+
+<div class="card">
+<h3 style="text-align:center">Your Mug Preview</h3>
+<div class="preview">
+<div class="mug">
+<div class="handle"></div>
+<div class="cup"></div>
+<img id="photo" alt="Your photo preview" hidden>
+<div id="placeholder">Your Photo Here</div>
+</div>
+<p style="color:#333">11 OZ White Ceramic Mug</p>
+</div>
+<p class="note">यह केवल शुरुआती डिजाइन प्रीव्यू है।</p>
+</div>
+
+<button class="action" onclick="alert('Cart feature will be added next!')">
+ADD TO CART
+</button>
+
+<button class="action" onclick="alert('Order system will be added next!')">
+BUY NOW
+</button>
+
+</div>
+
+<script>
+const upload=document.getElementById('upload');
+const photo=document.getElementById('photo');
+const placeholder=document.getElementById('placeholder');
+
+upload.addEventListener('change',function(){
+ const file=this.files[0];
+ if(!file)return;
+ if(!file.type.startsWith('image/')){
+  alert('कृपया फोटो चुनें');
+  return;
+ }
+ const reader=new FileReader();
+ reader.onload=function(e){
+  photo.src=e.target.result;
+  photo.hidden=false;
+  placeholder.style.display='none';
+ };
+ reader.readAsDataURL(file);
+});
+</script>
 
 </body>
 </html>
