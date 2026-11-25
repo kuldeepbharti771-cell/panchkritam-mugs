@@ -196,5 +196,16 @@ footer {
     <p>Made with ❤️</p>
 </footer>
 
+<script type="module">
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+const SUPABASE_URL = 'https://udddzdrmiiccqotwetqk.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_kjc5IVZGBEiBY8_YM2feeA__gup3C3g';
+
+window.supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+console.log('Panchkritam connected to Supabase');
+</script>
+    
 </body>
 </html>
